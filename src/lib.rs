@@ -29,8 +29,8 @@ pub fn get_lines_from_input_string(input: String) -> Vec<String> {
 
 /// Helper to get input from default location as vector of Strings, one String per line
 /// **NOTE**: this function does not perform _any_ error handling
-pub fn get_default_input_lines() -> Vec<String> {
-    get_lines_from_input_string(fs::read_to_string(get_input_path(Vec::new())).unwrap())
+pub fn get_default_input_lines(args: Option<Vec<String>>) -> Vec<String> {
+    get_lines_from_input_string(fs::read_to_string(get_input_path(args.unwrap_or(Vec::new()))).unwrap())
 }
 
 #[cfg(test)]
