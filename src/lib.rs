@@ -1,3 +1,4 @@
+use std::fs;
 
 /// Gets input path from the first program argument or default to `../input.txt`
 /// 
@@ -24,6 +25,11 @@ pub fn get_input_path(args: Vec<String>) -> String {
 /// Converts puzzle input String to vector with String entry for each line
 pub fn get_lines_from_input_string(input: String) -> Vec<String> {
     input.lines().map(|l| l.to_string()).collect()
+}
+
+/// Helper to get input from default location as vector of Strings, one String per line
+pub fn get_default_input_lines() -> Vec<String> {
+    get_lines_from_input_string(fs::read_to_string(get_input_path(Vec::new())).unwrap())
 }
 
 #[cfg(test)]
