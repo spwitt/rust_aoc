@@ -21,18 +21,35 @@ pub fn get_input_path(args: Vec<String>) -> String {
     }
 }
 
+/// Converts puzzle input String to vector with String entry for each line
+pub fn get_lines_from_input_string(input: String) -> Vec<String> {
+    input.lines().map(|l| l.to_string()).collect()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn get_input_path_default() {
-        assert_eq!(get_input_path(Vec::new()), "../input.txt");
+        assert_eq!(get_input_path(vec!["./program".to_string()]), "../input.txt");
     }
 
     #[test]
     fn get_input_path_value() {
         let args = vec!["./program".to_string(), "my_input.txt".to_string()];
         assert_eq!(get_input_path(args), "my_input.txt");
+    }
+
+    #[test]
+    fn get_lines_empty() {
+        assert!(get_lines_from_input_string(String::new()).is_empty());
+    }
+
+    #[test]
+    fn get_lines() {
+        assert_eq!(get_lines_from_input_string("input for\nthis\r\npuzzle\n".to_string()),
+            vec!["input for".to_string(), "this".to_string(), "puzzle".to_string()]
+        );
     }
 }
